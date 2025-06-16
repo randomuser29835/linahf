@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LINAH - Secret Page</title>
+  <style>
+    body {
+      font-family: 'Wendy One', sans-serif;
+      background-image: radial-gradient(#374566, #010203);
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+    }
+
+    .password-box {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+      backdrop-filter: blur(10px);
+      text-align: center;
+    }
+
+    input[type="password"] {
+      padding: 15px;
+      font-size: 20px;
+      border-radius: 10px;
+      border: none;
+      margin-bottom: 20px;
+      width: 250px;
+      text-align: center;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 20px;
+      border: none;
+      border-radius: 10px;
+      background-color: #ff4081;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🥳مش كل مرة بتسلم الجرة غيرت الباسورد يا حلوة </h1>
+  <h1>اذا عجزتي عادي احكيلي بلمحلك</h1>
+
+  <div class="password-box">
+    <input type="password" id="passwordInput" placeholder="كلمة السر">
+    <br>
+    <button onclick="checkPassword()">دخول</button>
+  </div>
+
+  <script>
+    
+    const correctHash = "ddc62bbaa0272a9ed117be5e05dce6f2be6c689870c2385a34e3e9480e985190";
+
+    async function hashPassword(password) {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(password);
+      const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function checkPassword() {
+      const password = document.getElementById("passwordInput").value;
+      const hash = await hashPassword(password);
+
+      if (hash === correctHash) {
+        window.location.href = "linah2.html";
+      } else {
+        alert("كلمة السر غلط 😅");
+      }
+    }
+  </script>
+
+</body>
+</html>

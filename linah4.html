@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LINAH - Secret Page</title>
+  <style>
+    body {
+      font-family: 'Wendy One', sans-serif;
+      background-image: radial-gradient(#374566, #010203);
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+    }
+
+    .password-box {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+      backdrop-filter: blur(10px);
+      text-align: center;
+    }
+
+    input[type="password"] {
+      padding: 15px;
+      font-size: 20px;
+      border-radius: 10px;
+      border: none;
+      margin-bottom: 20px;
+      width: 250px;
+      text-align: center;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 20px;
+      border: none;
+      border-radius: 10px;
+      background-color: #ff4081;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- مكان الفيديو -->
+  <div class="video-container">
+    <iframe src="https://www.youtube.com/embed/jlHxXX01zfI"
+      title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write;
+      encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  </div>
+  
+  <style>
+    .video-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+  
+    .video-container iframe {
+      width: 80%;
+      max-width: 600px;
+      height: 340px;
+      border: 3px solid white;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
+  </style>
+  
+  <!-- النص وصندوق الباسورد -->
+  <h4>جربي تفكري بتاريخ 23\04\2025 الساعة 12:16</h4>
+  <div class="password-box">
+    <input type="password" id="passwordInput" placeholder="كلمة السر">
+    <br>
+    <button onclick="checkPassword()">دخول</button>
+  </div>
+  
+  <script>
+    const correctHash = "86fa462ceeb6f5c957714d5b60a058c70d3d5770b363bcf01d8744fe785a9f6c";
+  
+    async function hashPassword(password) {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(password);
+      const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+  
+    async function checkPassword() {
+      const password = document.getElementById("passwordInput").value;
+      const hash = await hashPassword(password);
+  
+      if (hash === correctHash) {
+        window.location.href = "linahf.html";
+      } else {
+        alert("كلمة السر غلط 😅");
+      }
+    }
+  </script>
+  
+  <style>
+    .password-box {
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+  
+
+</body>
+</html>

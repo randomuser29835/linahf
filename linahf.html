@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>عيد ميلاد لِـينَـه</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #fdf0f0, #ffe5ec);
+      font-family: 'Amiri', serif;
+      color: #5c2a2a;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    /* زخارف الخلفية */
+    .decoration {
+      position: absolute;
+      z-index: 0;
+      opacity: 0.2;
+      pointer-events: none;
+    }
+    
+    .decoration.heart {
+      font-size: 50px;
+      color: #d63384;
+      top: 10%;
+      left: 5%;
+      animation: float 8s infinite ease-in-out;
+    }
+    
+    .decoration.flower {
+      font-size: 40px;
+      color: #ff9ecb;
+      bottom: 15%;
+      right: 5%;
+      animation: float 10s infinite ease-in-out;
+      transform: rotate(-30deg);
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 500px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 2px solid #ffc0cb;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 10;
+      backdrop-filter: blur(3px);
+    }
+    
+    /* العنوان الرئيسي */
+    .header {
+      text-align: center;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    
+    .header h1 {
+      color: #d63384;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    
+    .header::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 15%;
+      right: 15%;
+      height: 2px;
+      background: linear-gradient(to right, transparent, #ffc0cb, transparent);
+      border-radius: 50%;
+    }
+    
+    /* تاريخ الميلاد */
+    .birthdate {
+      text-align: center;
+      font-size: 18px;
+      color: #a06f3e;
+      margin-bottom: 20px;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .birthdate i {
+      color: #d63384;
+      font-size: 20px;
+    }
+    
+    /* نص الرسالة */
+    .message {
+      font-size: 18px;
+      line-height: 2.0;
+      text-align: justify;
+      position: relative;
+    }
+    
+    .message p {
+      margin-bottom: 20px;
+      position: relative;
+      padding-right: 30px;
+    }
+    
+    .message p::before {
+      content: "❦";
+      position: absolute;
+      right: 0;
+      top: 0;
+      color: #ff9ecb;
+      font-size: 20px;
+    }
+    
+    /* التوقيع */
+    .signature {
+      text-align: left;
+      margin-top: 25px;
+      padding-top: 20px;
+      position: relative;
+    }
+    
+    .signature::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 20%;
+      right: 20%;
+      height: 1.5px;
+      background: linear-gradient(to right, transparent, #c3a87c, transparent);
+    }
+    
+    .signature p {
+      font-size: 18px;
+      color: #d63384;
+      font-style: italic;
+      line-height: 1.8;
+    }
+    
+    /* تأثيرات متحركة */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.2; }
+      50% { transform: scale(1.1); opacity: 0.4; }
+    }
+    
+    /* رسالة تظهر عند النقر */
+    .hidden-message {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.95);
+      border: 2px solid #d63384;
+      border-radius: 15px;
+      padding: 25px;
+      text-align: center;
+      z-index: 1000;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      display: none;
+      width: 90%;
+      max-width: 350px;
+    }
+    
+    .hidden-message h2 {
+      color: #d63384;
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+    
+    .hidden-message p {
+      font-size: 18px;
+      line-height: 1.8;
+      margin-bottom: 15px;
+    }
+    
+    .close-btn {
+      margin-top: 15px;
+      background: #d63384;
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: 'Amiri', serif;
+    }
+    
+    .close-btn:hover {
+      background: #a02565;
+    }
+    
+    /* زر القلب */
+    .heart-btn {
+      position: fixed;
+      bottom: 15px;
+      left: 15px;
+      background: none;
+      border: none;
+      font-size: 35px;
+      color: #d63384;
+      cursor: pointer;
+      animation: pulse 2s infinite;
+      z-index: 20;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* رسالة القلوب */
+    .hearts {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 5;
+    }
+    
+    .heart {
+      position: absolute;
+      color: #ff6b9c;
+      font-size: 20px;
+      animation: fall 8s linear forwards;
+      opacity: 0.7;
+    }
+    
+    @keyframes fall {
+      0% {
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.7;
+      }
+      90% {
+        opacity: 0.5;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+    
+    /* تفاصيل استجابة */
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px 15px;
+      }
+      
+      .header h1 {
+        font-size: 21px;
+      }
+      
+      .birthdate {
+        font-size: 16px;
+      }
+      
+      .message {
+        font-size: 17px;
+        line-height: 1.9;
+      }
+      
+      .signature p {
+        font-size: 17px;
+      }
+      
+      .hidden-message {
+        padding: 20px;
+      }
+      
+      .hidden-message h2 {
+        font-size: 22px;
+      }
+      
+      .hidden-message p {
+        font-size: 17px;
+      }
+      
+      .message p {
+        padding-right: 25px;
+      }
+      
+      .message p::before {
+        font-size: 18px;
+      }
+    }
+    
+    @media (max-width: 360px) {
+      .header h1 {
+        font-size: 19px;
+      }
+      
+      .message {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- زخارف متحركة -->
+  <div class="decoration heart">❤</div>
+  <div class="decoration flower">✿</div>
+  
+  <!-- رسالة القلوب -->
+  <div class="hearts" id="heartsContainer"></div>
+  
+  <!-- زر القلب -->
+  <button class="heart-btn" onclick="showHiddenMessage()">❤</button>
+  
+  <div class="container">
+    <div class="header">
+      <h1>إلى تلك التي اختارها القدر لتكون المعنى الخفي في فوضى حياتي…</h1>
+      <div class="birthdate">
+        <i class="fas fa-birthday-cake"></i>
+        في يوم ميلادك، ١٧ سبتمبر
+      </div>
+    </div>
+    
+    <div class="message">
+      <p> اليوم يوم ميلادك وأنا مش بس مبسوط لأنه يومك، كمان لأنه يذكرني بإنه في حد في هالدنيا خلاني أحس بالحياة بطريقة مختلفة.</p>
+      
+      <p>أنا متأكد إنه الطريق ما راح يكون دايمًا سهل، وراح نمر بصعوبات ومشاكل، مرات نحس إنه الدنيا كلها ضدنا، بس وجودك جنبي يعطيني القوة والطمأنينة، لأني بعرف إنو مهما صار، إحنا سوا، وقادرين نتخطى أي شي.</p>
+      
+      <p>بحب أفكر كيف راح نعيش أيامنا الجاية مع بعض، نتعلم من أخطائنا، نضحك على الذكريات، ونكبر سوا، نكون أقوى وأحلى من قبل. حياتي معك إلو طعم ثاني، طعم أمان وفرح ما كنت أعرفه.</p>
+      
+      <p>أنا سعيد اليوم مش بس لأنك كبرتي سنة، لأننا مع بعض، وبصير لنا فرص جديدة نخلق فيها أحلى ذكريات. أتمنى لنا حياة طويلة، مليانة حب، تفهم، وصبر، حياة نقدر نواجه فيها الدنيا يد واحدة، قلب واحد.</p>
+      
+      <p>وأكثر شي بفرح فيه إنه بالرغم من كل شي، إحنا ما بنخاف نواجه بعضنا بكل صدق، حتى لو صار في مشاكل أو اختلافات، دايمًا بنقدر نرجع لبعض ونصلح كل شي.</p>
+    </div>
+    
+    <div class="signature">
+      <p>عيد ميلاد سعيد يا لينه،</p>
+      <p>بحبك اليوم وكل يوم</p>
+      <p>وأنا بوعدك إني رح أكون دايمًا جنبك،</p>
+      <p>نعيش سوا، نحب سوا، ونكبر سوا،</p>
+      <p>ونخلي حبنا قصة تظل محفورة في كل لحظة من حياتنا.</p>
+    </div>
+  </div>
+  
+  <!-- رسالة مخفية تظهر عند النقر -->
+  <div class="hidden-message" id="hiddenMessage">
+    <h2>بمناسبة عيد ميلادك الحلو ❤</h2>
+    <p>أتمنى لك سنة جديدة مليانة فرح وسعادة وأيام حلوه وذكريات أجمل وعمر طويل مليان حب وأحلام تتحقق</p>
+    <p>كل عام وأنتِ نور حياتي ❤</p>
+    <button class="close-btn" onclick="closeMessage()">إغلاق</button>
+  </div>
+  
+  <script>
+    // عرض الرسالة المخفية
+    function showHiddenMessage() {
+      document.getElementById('hiddenMessage').style.display = 'block';
+      createHearts();
+    }
+    
+    // إغلاق الرسالة
+    function closeMessage() {
+      document.getElementById('hiddenMessage').style.display = 'none';
+    }
+    
+    // إنشاء قلوب متساقطة
+    function createHearts() {
+      const heartsContainer = document.getElementById('heartsContainer');
+      heartsContainer.innerHTML = '';
+      
+      for (let i = 0; i < 30; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '❤';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (Math.random() * 5 + 3) + 's';
+        heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+        heart.style.opacity = Math.random() * 0.5 + 0.3;
+        heartsContainer.appendChild(heart);
+      }
+      
+      // إزالة القلوب بعد انتهاء الرسوم المتحركة
+      setTimeout(() => {
+        heartsContainer.innerHTML = '';
+      }, 8000);
+    }
+    
+    // تأثيرات عند التحميل
+    window.addEventListener('load', function() {
+      // تحريك الزخارف
+      const decorations = document.querySelectorAll('.decoration');
+      decorations.forEach((dec, index) => {
+        dec.style.animationDelay = (index * 1) + 's';
+      });
+      
+      // إضافة تأثيرات للقلب عند النقر
+      const heartBtn = document.querySelector('.heart-btn');
+      heartBtn.addEventListener('click', function() {
+        heartBtn.style.transform = 'scale(1.3)';
+        heartBtn.style.color = '#ff0066';
+        setTimeout(() => {
+          heartBtn.style.transform = 'scale(1)';
+          heartBtn.style.color = '#d63384';
+        }, 300);
+      });
+    });
+  </script>
+</body>
+</html>

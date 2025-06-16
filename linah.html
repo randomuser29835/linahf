@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <title>Happy Birthday</title>
+  <link href="https://fonts.googleapis.com/css?family=Wendy+One&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Wendy One', sans-serif;
+      background-image: radial-gradient(#374566, #010203);
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      color: white;
+      text-align: center;
+      direction: rtl;
+    }
+    .container {
+      width: 800px;
+      height: 420px;
+      margin: 30px auto;
+      position: relative;
+    }
+    .balloon {
+      width: 738px;
+      margin: 0 auto;
+      padding-top: 30px;
+      position: relative;
+      height: 160px;
+    }
+    .balloon > div {
+      width: 104px;
+      height: 140px;
+      background: rgba(182, 15, 97, 0.9);
+      border-radius: 80% 80% 80% 80%;
+      margin: 0 auto;
+      position: absolute;
+      padding: 10px;
+      box-shadow: inset 17px 7px 10px rgba(182, 15, 97, 0.9);
+      transform-origin: bottom center;
+      font-size: 4.8em;
+      line-height: 140px;
+      color: white;
+      user-select: none;
+    }
+    /* Colors and positions for balloons */
+    .balloon > div:nth-child(1) { left: 0; background: rgba(182, 15, 97, 0.9); animation: balloon1 6s ease-in-out infinite; box-shadow: inset 10px 10px 10px rgba(135, 11, 72, 0.9); }
+    .balloon > div:nth-child(2) { left: 120px; background: rgba(242, 112, 45, 0.9); animation: balloon2 6s ease-in-out infinite; box-shadow: inset 10px 10px 10px rgba(222, 85, 14, 0.9); }
+    .balloon > div:nth-child(3) { left: 240px; background: rgba(45, 181, 167, 0.9); animation: balloon4 6s ease-in-out infinite; box-shadow: inset 10px 10px 10px rgba(35, 140, 129, 0.9); }
+    .balloon > div:nth-child(4) { left: 360px; background: rgba(190, 61, 244, 0.9); animation: balloon1 5s ease-in-out infinite; box-shadow: inset 10px 10px 10px rgba(173, 14, 240, 0.9); }
+    .balloon > div:nth-child(5) { left: 480px; background: rgba(180, 224, 67, 0.9); animation: balloon3 5s ease-in-out infinite; box-shadow: inset 10px 10px 10px rgba(158, 206, 34, 0.9); }
+    .balloon > div:nth-child(6) { left: 600px; background: rgba(242, 194, 58, 0.9); animation: balloon2 3s ease-in-out infinite; box-shadow: inset 10px 10px 10px rgba(234, 177, 15, 0.9); }
+
+    /* Balloon animations */
+    @keyframes balloon1 {
+      0%, 100% { transform: translateY(0) rotate(-6deg); }
+      50% { transform: translateY(-20px) rotate(8deg); }
+    }
+    @keyframes balloon2 {
+      0%, 100% { transform: translateY(0) rotate(6deg); }
+      50% { transform: translateY(-30px) rotate(-8deg); }
+    }
+    @keyframes balloon3 {
+      0%, 100% { transform: translate(0, -10px) rotate(6deg); }
+      50% { transform: translate(-20px, 30px) rotate(-8deg); }
+    }
+    @keyframes balloon4 {
+      0%, 100% { transform: translate(10px, -10px) rotate(-8deg); }
+      50% { transform: translate(-15px, 10px) rotate(10deg); }
+    }
+
+    h1 {
+      margin-top: 210px;
+      font-size: 3.5em;
+    }
+
+    .cake-container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 9999;
+      user-select: none;
+    }
+    .cake {
+      width: 200px;
+      height: 150px;
+      background: pink;
+      border-radius: 10px;
+      position: relative;
+      margin: 0 auto 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    .chocolate {
+      width: 180px;
+      height: 30px;
+      background: #4b2e0f;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      position: absolute;
+      top: 0;
+      left: 10px;
+      box-shadow: inset 0 -5px 10px rgba(0,0,0,0.4);
+    }
+    .chocolate::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 15px;
+      top: 15px;
+      left: 0;
+      background:
+        radial-gradient(circle at 20% 50%, #3b2009, transparent 40%),
+        radial-gradient(circle at 50% 30%, #3b2009, transparent 40%),
+        radial-gradient(circle at 80% 60%, #3b2009, transparent 40%);
+    }
+    .candle {
+      width: 10px;
+      height: 30px;
+      background: yellow;
+      position: absolute;
+      top: -30px;
+      border-radius: 5px;
+    }
+    .flame {
+      width: 10px;
+      height: 10px;
+      background: orange;
+      border-radius: 50%;
+      position: absolute;
+      top: -10px;
+      left: 0;
+      animation: flicker 1s infinite;
+    }
+    @keyframes flicker {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+
+    #countdown {
+      font-size: 30px;
+      color: white;
+      margin-top: 20px;
+    }
+
+    #myButton {
+      display: none;
+      padding: 20px 40px;
+      font-size: 24px;
+      background: #ff4081;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      user-select: none;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="balloon">
+      <div>☺</div>
+      <div>B</div>
+      <div>D</div>
+      <div>A</div>
+      <div>Y</div>
+      <div>!</div>
+    </div>
+    <h1>LINAH</h1>
+  </div>
+
+  <div class="cake-container" id="content">
+    <div class="cake">
+      <div class="chocolate"></div>
+      <div class="candle" style="left:50px;"><div class="flame"></div></div>
+      <div class="candle" style="left:90px;"><div class="flame"></div></div>
+      <div class="candle" style="left:130px;"><div class="flame"></div></div>
+    </div>
+    <div id="countdown"></div>
+    <button id="myButton">عيد ميلاد سعيد 🎉</button>
+  </div>
+
+  <script>
+    const targetDate = new Date("2025-06-17T00:00:00").getTime();
+
+    const countdownEl = document.getElementById("countdown");
+    const contentEl = document.getElementById("content");
+    const buttonEl = document.getElementById("myButton");
+
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance <= 0) {
+        clearInterval(timer);
+        countdownEl.textContent = "🎉 كل كلمة حب ما بتوفيكي حقك، إنتِ ملكة قلبي وضو حياتي. ما في يوم بيمر إلا وأنا بفكر فيكي وبحس إن الدنيا بتضحكلي لأنك موجودة فيها. الله ويخليلي ياكي ويخلي هالحب ويكبر بينا كل يوم أكتر. 🎉";
+        buttonEl.style.display = "inline-block";
+      } else {
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        countdownEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      }
+    }, 1000);
+
+    // زر يمكن عمله لو أردت إضافة تفاعل عند الضغط
+    async function hashPassword(password) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    return hashHex;
+}
+
+buttonEl.addEventListener('click', async () => {
+    alert("عيد ميلاد سعيد يا LINAH! 🎉🎂");
+
+    const inputPassword = prompt("ادخل كلمة السر:");
+    const hashedInput = await hashPassword(inputPassword);
+    const correctHash = "5ea3b98d9bf792b945e3407262ca311723f103d22be13ffdcb9b9cd3602ab7ae"; // حط هون الهاش الحقيقي للباسورد
+
+    if (hashedInput === correctHash) {
+        window.location.href = "linah1.html";
+    } else {
+        alert("كلمة السر خاطئة!");
+    }
+});
+
+
+
+  </script>
+</body>
+</html>
